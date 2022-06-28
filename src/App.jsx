@@ -15,7 +15,7 @@ import jwt_decode from "jwt-decode";
 import LogOut from "./components/logout";
 import FindRaces from "./routes/findRaces";
 import Test from "./routes/test"
-
+import Matchpage from "./routes/matchpage";
 
 function App() {
   const [user, setUser] = useState("");
@@ -92,7 +92,7 @@ function App() {
             }
           >
 
-            <Route path="matches" element={<Racepage />} />
+            <Route path="matches" element={<Matchpage />} />
 
             <Route
               path="login" element={<LogIn onAdd={login} />}/>
