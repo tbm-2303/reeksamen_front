@@ -16,46 +16,44 @@ const Header = ({loggedIn,role,setRole,setLoggedIn,facade,setUser}) => {
     <div>
       <header className="header-container">
         {/*===== Admin role only =====*/}
-        {role == "admin" ? (
+        {role === "admin" ? (
           <>
-            <NavLink to="/admin/races">
-              <button className="btn" type="button">
-                Races
-              </button>
-            </NavLink>
-
             <NavLink to="/create">
               <button className="btn" type="button">
                 Create
               </button>
             </NavLink>
-            <NavLink to="/cars">
+            <NavLink to="/updateMatch">
               <button className="btn" type="button">
-                Cars
+                Update Match
               </button>
             </NavLink>
-            <NavLink to="/drivers">
-          <button className="btn" type="button">
-           Drivers
-          </button>
-        </NavLink>
+            <NavLink to="/deletePlayer">
+              <button className="btn" type="button">
+                Delete Player
+              </button>
+            </NavLink>
           </>
         ) : null}
 
         {/*===== User role only =====*/}
         {role === "user" ? (
           <>
-        <NavLink to="/races">
+        <NavLink to="/matches">
           <button className="btn" type="button">
-            Races
+            matches
           </button>
         </NavLink>
-        <NavLink to="/myraces">
+        <NavLink to="/matchesByLocation">
           <button className="btn" type="button">
-            My Races
+            matchesbylocation
           </button>
         </NavLink>
-    
+        <NavLink to="/myMatches">
+          <button className="btn" type="button">
+          myMatches
+          </button>
+        </NavLink>
         </>
         ) : null}
 

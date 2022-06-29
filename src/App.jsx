@@ -3,26 +3,25 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import LogIn from "./routes/login";
 import "./styles/index.css";
 import "./styles/geee.css";
-import Racepage from "./routes/racepage2"
 import Createpage from "./routes/createCentral";
-import CreateRace from "./routes/createRace"
-import CreateCar from "./routes/createCar"
-import CreateDriver from "./routes/createDriver"
 import Header from "./components/header";
 import facade from "./facades/apifacade";
-import { loginUrl } from "./settings";
 import jwt_decode from "jwt-decode";
 import LogOut from "./components/logout";
-import FindRaces from "./routes/findRaces";
-import Test from "./routes/test"
 import Matchpage from "./routes/matchpage";
+import FindMatchByLocation from "./routes/FindMatchByLocation";
+import MyMatches from "./routes/myMatches";
+import CreatePlayer2 from "./routes/createPlayer2";
+import CreateLocation from "./routes/createLocation";
+import CreateMatch from "./routes/createMatch";
+import UpdateMatch from "./routes/updateMatch";
+import DeletePlayer from "./routes/deletePlayer";
+
 
 function App() {
   const [user, setUser] = useState("");
   const [userRole, setUserRole] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-
-
 
   const login = (user, pass) => {
    const res =  facade.login(user, pass);
@@ -35,34 +34,12 @@ function App() {
     console.log(res);
   };
 
-
-
   const logout = (user, pass) => {
     facade.logout(user, pass);
     setLoggedIn(false);
     setUserRole("");
     setUser("");
   };
-  const logInFunc = async (user) => {
-      const res = await fetch(loginUrl, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(user),
-    });
-
-    const data = await res.json();
-    setUser(data.username);
-    setUserRole(data.role);
-    if (data.username != null && data.username != "") {
-      setLoggedIn(true);
-    }
-  };
-
-
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -93,6 +70,22 @@ function App() {
           >
 
             <Route path="matches" element={<Matchpage />} />
+
+            <Route path="matchesByLocation" element={<FindMatchByLocation />} />
+
+            <Route path="myMatches" element={<MyMatches/>} />
+
+            <Route path="updateMatch" element={<UpdateMatch/>} />
+
+            <Route path="deletePlayer" element={<DeletePlayer/>} />
+
+            <Route path="delete" element={<UpdateMatch/>} />
+
+            <Route path="create" element={<Createpage/>}>
+              <Route path="player" element={<CreatePlayer2 />} />
+              <Route path="location" element={<CreateLocation />} />
+              <Route path="match" element={<CreateMatch />} />
+            </Route>
 
             <Route
               path="login" element={<LogIn onAdd={login} />}/>

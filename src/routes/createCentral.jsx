@@ -7,19 +7,19 @@ const Createpage = () => {
   return (
     <div>
       <div className="">
-        <h1>Create something</h1>
-        <NavLink to="/create/car">
-          <button>create car</button>
-        </NavLink>
-
-      
-        <NavLink to="/create/race">
-          <button>create race</button>
+        <h1>title</h1>
+        <NavLink to="/create/player">
+          <button>create player</button>
         </NavLink>
         
-        <NavLink to="/create/driver">
-        <button>create driver</button>
+        <NavLink to="/create/match">
+        <button>create match</button>
         </NavLink>
+
+        <NavLink to="/create/location">
+        <button>create location</button>
+        </NavLink>
+
       </div>
 
       <Outlet />

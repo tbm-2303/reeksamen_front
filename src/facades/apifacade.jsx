@@ -65,11 +65,86 @@ const fetchMyRaces = (username) => {
   return fetch(URL + `/api/race/driver/${username}`, options).then(handleHttpErrors);
 };
 
+
+
 const fetchAllMatches = () => {
   const options = makeOptions("GET", false)//True add's the token
-  return fetch(URL +"/api/match/getall/", options).then(handleHttpErrors);
+  return fetch(URL +"/api/match/getAll/", options).then(handleHttpErrors);
 }
 
+const fetchMatchesByLocation = (locationid) => {
+  const options = makeOptions("GET", false)//True add's the token
+  return fetch(URL +`/api/match/getByLocation/${locationid}`, options).then(handleHttpErrors);
+}
+
+const fetchMyMatches = (name) => {
+  const options = makeOptions("GET", false)//True add's the token
+  return fetch(URL +`/api/match/getMyMatches/${name}`, options).then(handleHttpErrors);
+}
+
+
+
+
+const createPlayer = (name, phone, email, status, username) => {
+  const options = makeOptions("POST", false, {
+    name: name,
+    phone: phone,
+    email: email,
+    status: status
+  });
+  return fetch(URL + `/api/match/createPlayer/${username}`, options)
+    .then(handleHttpErrors)
+};
+
+
+
+const createLocation = (address, city, con, name) => {
+  const options = makeOptions("POST", false, {
+    address: address,
+    city: city,
+    con: con,
+    name: name
+  });
+  return fetch(URL + "/api/match/createLocation", options)
+    .then(handleHttpErrors)
+};
+
+
+const createMatch = (opponent, judge, type, inDoor, locationid) => {
+  const options = makeOptions("POST", false, {
+    opponent: opponent,
+    judge: judge,
+    type: type,
+    inDoor: inDoor
+  });
+
+  return fetch(URL + `/api/match/create/${locationid}`, options)
+    .then(handleHttpErrors)
+};
+
+const updateMatch = (opponent, judge, type, inDoor, id) => {
+  const options = makeOptions("PUT", false, {
+    opponent: opponent,
+    judge: judge,
+    type: type,
+    inDoor: inDoor
+  });
+
+  return fetch(URL + `/api/match/${id}`, options)
+    .then(handleHttpErrors)
+};
+
+
+const deletePlayer = (id) => {
+  const options = makeOptions("DELETE", false); //True add's the token
+  return fetch(URL + `/api/match/delete/${id}`, options).then(handleHttpErrors);
+};
+
+
+const fetchAllPlayers = () => {
+  const options = makeOptions("GET", false)//True add's the token
+  return fetch(URL +"/api/match/getAllPlayers/", options).then(handleHttpErrors);
+}
 
 
  return {
@@ -82,7 +157,15 @@ const fetchAllMatches = () => {
      fetchData,
      fetchAllRaces,
      fetchMyRaces,
-     fetchAllMatches
+     fetchAllMatches,
+     fetchMatchesByLocation,
+     fetchMyMatches,
+     createPlayer,
+     createLocation,
+     createMatch,
+     updateMatch,
+     deletePlayer,
+     fetchAllPlayers,
  }
 }
 const facade = apiFacade();

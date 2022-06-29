@@ -1,25 +1,30 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import facade from "../facades/apifacade";
 
 
-const Matchpage = () => {
-  const [data, setData] = useState([{ id:"1", opponent:"d", judge:"d", type:"Dde", inDoor:"ye"}]);
+
+const FindMatchByLocation = () => {
+  const [data, setData] = useState([]);
+  const [location, setLocation] = useState("");
 
 
-    useEffect(() => {
-        const getMatches = async () => {
-          const data = await facade.fetchAllMatches();
-          setData(data);
-        };
-        getMatches();
-      }, []);
+  const submitMethod = async (evt) => {
+    evt.preventDefault();
+    const matches = await facade.fetchMatchesByLocation(location)
+    setData(matches);
+    setLocation("");
+  };
 
 
-return (
-<div className="App">
-      <h1>Matces</h1>
+  return ( 
+<div>
+    <form onSubmit={submitMethod}>
+            <input placeholder="id" id="car_id" onChange={(e) => setLocation(e.target.value)} />
+            <input type="submit" value="send" />
+       
+    </form>
+        <h1>Matces</h1>
       <NavLink to={"/"}>
         <button className="">Back</button>
       </NavLink>
@@ -34,7 +39,7 @@ return (
         </tr>
       </thead>
 
-      <tbody>
+        <tbody>
         {data.map(({id, opponent, judge, type, inDoor}) => (
           <tr key={id}>
             <td>{opponent}</td>
@@ -43,13 +48,19 @@ return (
             <td>{inDoor}</td>
           </tr>
         ))}
-      </tbody>
+        </tbody>
     </table>
 
 
-      
+
+
+
+    
 </div>
   );
 };
 
-export default Matchpage;
+export default FindMatchByLocation;
+
+
+  
