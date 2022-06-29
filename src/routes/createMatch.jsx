@@ -27,7 +27,7 @@ const CreateMatch = () => {
    
   return (
       <div className="">
-      <h2>create location</h2>
+      <h2>create match</h2>
         <form onChange={onChange} className="">
           <div className="">
             <input placeholder="Opponent" id="opp"/>
